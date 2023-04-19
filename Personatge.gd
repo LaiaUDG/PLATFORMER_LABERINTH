@@ -15,6 +15,7 @@ var _posInicial: Vector2  # posició on comença el nivell
 export var _nvides:= 3 
 export var _energia:=10
 var _caient := false # indica si el personatge està caient
+var _saltant := false
 
 # inicialitzem posició inicial i etiqueta on mostra nombre de vides
 func _ready():
@@ -25,6 +26,7 @@ func set_pos_inicial(pos:Vector2):
 	print(pos)
 	position = pos
 	_posInicial = pos # per quan es faci respawn 	
+
 
 func _physics_process(delta:float):
 	_vel.y += GRAVETAT # la gravetat va incrementant velocitat de caiguda 
@@ -41,14 +43,17 @@ func _physics_process(delta:float):
 	if Input.is_action_pressed("ui_right"):
 		_vel.x += ACCEL_X
 		_mirantADreta = true  # encara que segueixi movent-se a esquerra
-		$AnimationPlayer.play("Run")
+		if (_vel.y == 0):
+			$AnimationPlayer.play("Run")
 	elif Input.is_action_pressed("ui_left"):
 		_vel.x += -ACCEL_X   
 		_mirantADreta = false  # encara que segueixi movent-se a dreta
-		$AnimationPlayer.play("Run")
+		if (_vel.y == 0):
+			$AnimationPlayer.play("Run")
 	else: 
 		_vel.x = lerp(_vel.x, 0, 0.2) # interp. lineal 
-		$AnimationPlayer.play("Idle")
+		if (_vel.y == 0):
+			$AnimationPlayer.play("Idle")
 		
 	if is_on_floor():
 		if Input.is_action_just_pressed("salta"):
@@ -59,12 +64,15 @@ func _physics_process(delta:float):
 			#Salt.start();
 			#yield(Salt, "timeout")
 			_vel.y = VEL_SALT # no sumem, assignem
-			#$AnimationPlayer.play("Jump")
+			$AnimationPlayer.play("Jump")
 	else:
 		if _vel.y < 0: # està pujant 
-			$AnimationPlayer.play("Jump")
+			if (!$AnimationPlayer.is_playing()):
+				$AnimationPlayer.play("Jump")
 		elif _vel.y > 0: # està caient
-			$AnimationPlayer.play("fall")
+			if (!$AnimationPlayer.is_playing()):
+				$AnimationPlayer.play("fall")
+	
 	
 	_vel = move_and_slide(_vel, NORMAL)
 		
