@@ -5,7 +5,7 @@ const NORMAL := Vector2(0,-1)
 const GRAVETAT := 20
 const MAX_VEL_CAIGUDA := 200
 const MAX_VELOC := 150
-const VEL_SALT := -400
+const VEL_SALT := -600
 const ACCEL_X := 20  # efecte desitjat 
 
 # atributs
@@ -52,7 +52,14 @@ func _physics_process(delta:float):
 		
 	if is_on_floor():
 		if Input.is_action_just_pressed("salta"):
+			#var Salt = Timer.new()
+			#Salt.set_wait_time(0.3)
+			#Salt.set_one_shot(true)
+			#self.add_child(Salt)
+			#Salt.start();
+			#yield(Salt, "timeout")
 			_vel.y = VEL_SALT # no sumem, assignem
+			#$AnimationPlayer.play("Jump")
 	else:
 		if _vel.y < 0: # està pujant 
 			$AnimationPlayer.play("Jump")
