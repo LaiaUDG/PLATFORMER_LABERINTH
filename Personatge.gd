@@ -43,19 +43,21 @@ func _physics_process(delta:float):
 	if Input.is_action_pressed("ui_right"):
 		_vel.x += ACCEL_X
 		_mirantADreta = true  # encara que segueixi movent-se a esquerra
-		if (_vel.y == 0):
+		if (!_saltant and !_caient):
 			$AnimationPlayer.play("Run")
 	elif Input.is_action_pressed("ui_left"):
 		_vel.x += -ACCEL_X   
 		_mirantADreta = false  # encara que segueixi movent-se a dreta
-		if (_vel.y == 0):
+		if (!_saltant and !_caient):
 			$AnimationPlayer.play("Run")
 	else: 
 		_vel.x = lerp(_vel.x, 0, 0.2) # interp. lineal 
-		if (_vel.y == 0):
+		if (!_saltant and !_caient):
 			$AnimationPlayer.play("Idle")
 		
 	if is_on_floor():
+		_saltant=false
+		_caient=false
 		if Input.is_action_just_pressed("salta"):
 			#var Salt = Timer.new()
 			#Salt.set_wait_time(0.3)
@@ -65,13 +67,21 @@ func _physics_process(delta:float):
 			#yield(Salt, "timeout")
 			_vel.y = VEL_SALT # no sumem, assignem
 			$AnimationPlayer.play("Jump")
+			_saltant=true
 	else:
 		if _vel.y < 0: # està pujant 
+			_saltant=true
+			_caient=false
 			if (!$AnimationPlayer.is_playing()):
 				$AnimationPlayer.play("Jump")
 		elif _vel.y > 0: # està caient
+			_saltant=false
+			_caient=true
 			if (!$AnimationPlayer.is_playing()):
 				$AnimationPlayer.play("fall")
+		else:
+			_saltant=false
+			_caient=false
 	
 	
 	_vel = move_and_slide(_vel, NORMAL)
