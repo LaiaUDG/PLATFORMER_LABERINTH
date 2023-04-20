@@ -105,6 +105,3 @@ func respawn():
 	_mirantADreta = true
 	_vel = Vector2()   # aturat 
 
-
-func _on_Personatge_input_event(viewport, event, shape_idx):
-	if event is 

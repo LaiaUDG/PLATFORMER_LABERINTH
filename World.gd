@@ -31,3 +31,5 @@ func _on_Galeta_recollida(algu:Node):
 		$goal.visible = 1
 		$goal.apareixer()
 	
+func _on_Area2D_tocat():
+	pass # Replace with function body.
