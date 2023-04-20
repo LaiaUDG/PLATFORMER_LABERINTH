@@ -10,6 +10,7 @@ signal recollida(algu)  # algú ha recollit la moneda
 func _on_moneda_body_entered(body: Node):
 	if body in _recollidors: # si té capacitat de recollir moneda
 		emit_signal("recollida", body)
+		remove_from_group("Monedes")
 		queue_free()
 		
 # incorpora <reco> com a personatge que pot recollir la moneda

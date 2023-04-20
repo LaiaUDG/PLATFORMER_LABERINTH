@@ -28,6 +28,7 @@ func set_pos_inicial(pos:Vector2):
 	_posInicial = pos # per quan es faci respawn 	
 
 
+
 func _physics_process(delta:float):
 	_vel.y += GRAVETAT # la gravetat va incrementant velocitat de caiguda 
 	if _vel.y > MAX_VEL_CAIGUDA:
@@ -103,3 +104,7 @@ func respawn():
 	position = _posInicial
 	_mirantADreta = true
 	_vel = Vector2()   # aturat 
+
+
+func _on_Personatge_input_event(viewport, event, shape_idx):
+	if event is 

@@ -19,10 +19,15 @@ func _ready():
 
 # tocarà canvi de nivell
 func _on_goal_objectiu_assolit(esser:Node):
-	$goal.visible = 1
-	$goal.apareixer()
+	pass
 	# aquí ha de mostrar pantalla de GUANYAT
 
 func _on_Galeta_recollida(algu:Node):
 	var pers:= algu as Personatge
 	pers.suma_vides(1)
+	print(get_tree().get_nodes_in_group("Monedes").size())
+	if (get_tree().get_nodes_in_group("Monedes").size()==1):
+		print("Conseguit")
+		$goal.visible = 1
+		$goal.apareixer()
+	

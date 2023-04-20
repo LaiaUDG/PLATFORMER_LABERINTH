@@ -14,7 +14,6 @@ func apareixer():
 	yield(get_node("AnimationPlayer"), "animation_finished")
 	mostrar = true
 
-
 func _process(delta:float):
 	if (mostrar):
 		$AnimationPlayer.play("idle")
@@ -26,4 +25,5 @@ func _on_goal_body_entered(body: Node):
 	print(body.position)
 	print(position)
 	if body in _assolidors:
-		emit_signal("objectiu_assolit", body)
+		if (mostrar):
+			emit_signal("objectiu_assolit", body)

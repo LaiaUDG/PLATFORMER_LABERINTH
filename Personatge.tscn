@@ -184,3 +184,5 @@ margin_right = 77.0
 margin_bottom = 15.0
 text = "VIDES: 
 "
+
+[connection signal="input_event" from="." to="." method="_on_Personatge_input_event"]
