@@ -12,35 +12,44 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "Goal",
 "language": "GDScript",
-"path": "res://goal.gd"
+"path": "res://scripts/goal.gd"
 }, {
 "base": "Node2D",
 "class": "Mon",
 "language": "GDScript",
-"path": "res://World.gd"
+"path": "res://scripts/World.gd"
 }, {
-"base": "Area2D",
+"base": "Reference",
 "class": "Moneda",
 "language": "GDScript",
-"path": "res://moneda.gd"
+"path": "res://scripts/moneda.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Personatge",
 "language": "GDScript",
-"path": "res://Personatge.gd"
+"path": "res://scripts/Personatge.gd"
+}, {
+"base": "Area2D",
+"class": "Projectil",
+"language": "GDScript",
+"path": "res://scripts/Projectil.gd"
 } ]
 _global_script_class_icons={
 "Goal": "",
 "Mon": "",
 "Moneda": "",
-"Personatge": ""
+"Personatge": "",
+"Projectil": ""
 }
 
 [application]
 
 config/name="Platformer_Laberinth"
-run/main_scene="res://World.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://Escenes/World.tscn"
+
+[autoload]
+
+Inici="*res://Inici.gd"
 
 [gui]
 
@@ -51,6 +60,11 @@ common/drop_mouse_on_gui_input_disabled=true
 salta={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Disparar={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 
