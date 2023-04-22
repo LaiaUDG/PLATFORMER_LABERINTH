@@ -22,14 +22,18 @@ func patrulla(delta):
 	else:
 		if	direction == 1:
 			if (unit_offset == 1):
-				$Area2D.scale.x=-1
-				direction = 0
+				$Enemic/Pausa.start()
+				if(state == "patrulla"):
+					$Enemic.scale.x=-1
+					direction = 0
 			else:
 				offset += _vel * delta
 		else:
 			if unit_offset ==0:
-				$Enemic.scale.x=1
-				direction = 1
+				$Enemic/Pausa.start()
+				if(state == "patrulla"):
+					$Enemic.scale.x=1
+					direction = 1
 			else:
 				offset -= _vel * delta
 
@@ -71,3 +75,5 @@ func _on_Enemic_body_entered(body: Node):
 			$Enemic/AnimationPlayer.play("Mal")
 	
 
+func _on_Pausa_timeout():
+	state = "patrulla"

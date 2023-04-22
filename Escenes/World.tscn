@@ -514,7 +514,9 @@ curve = SubResource( 13 )
 
 [node name="Enemic" parent="Path2D" groups=["Enemics"] instance=ExtResource( 10 )]
 position = Vector2( 845, -490 )
+loop = false
 SEGON = true
+state = "patrulla"
 
 [node name="Galeta" parent="." groups=["Monedes"] instance=ExtResource( 6 )]
 position = Vector2( 302, 527 )
@@ -550,6 +552,8 @@ shape = SubResource( 6 )
 
 [connection signal="atac" from="Enemic" to="." method="_on_Enemic_atac"]
 [connection signal="tocat" from="Enemic" to="." method="_on_Enemic_tocat"]
+[connection signal="atac" from="Path2D/Enemic" to="." method="_on_Enemic_atac"]
+[connection signal="tocat" from="Path2D/Enemic" to="." method="_on_Enemic_tocat"]
 [connection signal="recollida" from="Galeta" to="." method="_on_Galeta_recollida"]
 [connection signal="vida" from="Galeta" to="." method="_on_Galeta_vida"]
 [connection signal="recollida" from="Galeta3" to="." method="_on_Galeta_recollida"]

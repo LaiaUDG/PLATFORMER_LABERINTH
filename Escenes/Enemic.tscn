@@ -149,6 +149,10 @@ state = "Mal"
 
 [node name="Enemic" type="Area2D" parent="."]
 
+[node name="Pausa" type="Timer" parent="Enemic"]
+wait_time = 2.0
+one_shot = true
+
 [node name="Sprite" type="Sprite" parent="Enemic"]
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )
@@ -170,3 +174,4 @@ anims/RESET = SubResource( 3 )
 anims/Walk = SubResource( 4 )
 
 [connection signal="body_entered" from="Enemic" to="." method="_on_Enemic_body_entered"]
+[connection signal="timeout" from="Enemic/Pausa" to="." method="_on_Pausa_timeout"]
