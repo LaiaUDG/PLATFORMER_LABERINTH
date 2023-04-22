@@ -1,6 +1,7 @@
 extends Node2D
 
-# Called when the node enters the scene tree for the first time.
+
+
 func _ready():
 	var i = 1	
 	var sprite = 'Sprite' + str(i)

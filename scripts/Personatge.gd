@@ -111,8 +111,6 @@ func suma_vides(nv:int):
 		_immobil = true
 		node.set_texture(CorApagat)
 		$AnimationPlayer.play("Mort")
-		yield($AnimationPlayer,"animation_finished")
-		queue_free()
 		# pantalla inicial mode fail 
 	elif nv < 0: # ha perdut una vida
 		node.set_texture(CorApagat)

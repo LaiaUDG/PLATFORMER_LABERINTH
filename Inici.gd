@@ -6,6 +6,7 @@ const ESC_PERS:= preload("res://Escenes/Personatge.tscn")
 const NIV_1:=preload("res://Escenes/World.tscn")
 const NIV_2:=preload("res://Escenes/World2.tscn")
 const NIV_3:=preload("res://Escenes/World3.tscn")
+const FINAL:=preload("res://Pantalla_final.tscn")
 
 var _nivells:Array
 var _jugador:Personatge
@@ -21,11 +22,11 @@ func _init():
 	print("_jugador: ", _jugador)
 
 func seguent_niv():
+	_jugador.seguent_niv()
 	_nivActual += 1
-	if _nivActual > NIVELLS:
-		print("Victoria")
-	else:
-		SceneTree.set_current_scene(_nivells[_nivActual])
+	if _nivActual > NIVELLS: # esquema circular 
+		pantalla_final()
+	get_tree().change_scene_to(_nivells[_nivActual-1])
 		
-		s#canviar escena victoria
-
+func pantalla_final():
+	get_tree().change_scene_to(pantalla_final())

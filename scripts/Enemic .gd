@@ -78,6 +78,7 @@ func _on_Enemic_body_entered(body: Node):
 	if body in _Preses: # si és una víctima
 		emit_signal("atac")
 		vida += -1 
+		anterior = state
 		if (vida <= 0):
 			$Enemic/AnimationPlayer.play("Mort")
 		else:

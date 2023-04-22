@@ -13,7 +13,7 @@ func _ready():
 	_pers.set_pos_inicial($puntInici.position)  
 	add_child(_pers)  # afegim personatge a l'escena
 	_pers.connect("dispara", self, "_on_personatge_dispara")
-	
+	get_tree().call_group("Pomes", "afegir_recollidor", $Personatge) 
 	get_tree().call_group("Monedes", "afegir_recollidor", $Personatge) 
 	get_tree().call_group("Enemics", "afegir_presa", $Personatge) 
 	$goal.afegir_assolidor($Personatge)
