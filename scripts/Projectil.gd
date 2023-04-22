@@ -4,7 +4,7 @@ class_name Projectil extends Area2D
 # surt d'escena, també desapareix 
 
 signal disparat(area) # area tocada
-const GRAVETAT := 680
+const GRAVETAT := 980
 export var _vel:= 400 # píxels per segon 
 var _tocables:= []    # éssers afectats per la bala (inj. de depend.)
 var _emissors:= []    # éssers que disparen les bales 

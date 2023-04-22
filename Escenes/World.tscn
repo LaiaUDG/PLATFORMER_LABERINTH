@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Generic.tres" type="TileSet" id=1]
 [ext_resource path="res://Escenes/goal.tscn" type="PackedScene" id=2]
@@ -365,6 +365,11 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 1/shapes = [  ]
 1/z_index = 0
 
+[sub_resource type="Curve2D" id=13]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 845, -490, 0, 0, 0, 0, 1620, -490 )
+}
+
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 433, 10 )
 
@@ -494,31 +499,48 @@ tile_data = PoolIntArray( 1310755, 1, 0, 1441790, 0, 0, 1441791, 536870912, 0, 1
 position = Vector2( 1056, 478 )
 scale = Vector2( 1.3, 1.3 )
 
-[node name="Enemic" parent="." groups=["Enemics"] instance=ExtResource( 10 )]
+[node name="Enemic" parent="." instance=ExtResource( 10 )]
 position = Vector2( 190, 525 )
 scale = Vector2( 0.8, 0.8 )
+state = "quiet"
+
+[node name="Area2D" parent="Enemic" index="0" groups=["Enemics"]]
 
 [node name="puntInici" type="Position2D" parent="."]
 position = Vector2( 24, 520 )
 
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2( 302, 531 )
+scale = Vector2( 0.2, 0.2 )
+curve = SubResource( 13 )
+
+[node name="Enemic" parent="Path2D" instance=ExtResource( 10 )]
+position = Vector2( 845, -490 )
+SEGON = true
+
 [node name="Galeta" parent="." groups=["Monedes"] instance=ExtResource( 6 )]
 position = Vector2( 302, 527 )
+scale = Vector2( 0.2, 0.2 )
+VIDES = true
+
+[node name="Galeta3" parent="." groups=["Monedes"] instance=ExtResource( 6 )]
+position = Vector2( 101, 50 )
+scale = Vector2( 0.2, 0.2 )
+
+[node name="Galeta4" parent="." groups=["Monedes"] instance=ExtResource( 6 )]
+position = Vector2( 944, 301 )
+scale = Vector2( 0.2, 0.2 )
+
+[node name="Galeta5" parent="." groups=["Monedes"] instance=ExtResource( 6 )]
+position = Vector2( 932, 77 )
+scale = Vector2( 0.2, 0.2 )
+
+[node name="Galeta6" parent="." groups=["Monedes"] instance=ExtResource( 6 )]
+position = Vector2( 705, 561 )
 scale = Vector2( 0.2, 0.2 )
 
 [node name="Galeta2" parent="." groups=["Monedes"] instance=ExtResource( 6 )]
 position = Vector2( 50, 334 )
-scale = Vector2( 0.2, 0.2 )
-
-[node name="Galeta3" parent="." groups=["Monedes"] instance=ExtResource( 6 )]
-position = Vector2( 100, 50 )
-scale = Vector2( 0.2, 0.2 )
-
-[node name="Galeta4" parent="." groups=["Monedes"] instance=ExtResource( 6 )]
-position = Vector2( 935, 79 )
-scale = Vector2( 0.2, 0.2 )
-
-[node name="Galeta5" parent="." groups=["Monedes"] instance=ExtResource( 6 )]
-position = Vector2( 948, 302 )
 scale = Vector2( 0.2, 0.2 )
 
 [node name="Area2D" parent="." instance=ExtResource( 3 )]
@@ -531,10 +553,18 @@ shape = SubResource( 6 )
 [connection signal="atac" from="Enemic" to="." method="_on_Enemic_atac"]
 [connection signal="tocat" from="Enemic" to="." method="_on_Enemic_tocat"]
 [connection signal="recollida" from="Galeta" to="." method="_on_Galeta_recollida"]
-[connection signal="recollida" from="Galeta2" to="." method="_on_Galeta_recollida"]
+[connection signal="vida" from="Galeta" to="." method="_on_Galeta_vida"]
 [connection signal="recollida" from="Galeta3" to="." method="_on_Galeta_recollida"]
+[connection signal="vida" from="Galeta3" to="." method="_on_Galeta_vida"]
 [connection signal="recollida" from="Galeta4" to="." method="_on_Galeta_recollida"]
+[connection signal="vida" from="Galeta4" to="." method="_on_Galeta_vida"]
 [connection signal="recollida" from="Galeta5" to="." method="_on_Galeta_recollida"]
+[connection signal="vida" from="Galeta5" to="." method="_on_Galeta_vida"]
+[connection signal="recollida" from="Galeta6" to="." method="_on_Galeta_recollida"]
+[connection signal="vida" from="Galeta6" to="." method="_on_Galeta_vida"]
+[connection signal="recollida" from="Galeta2" to="." method="_on_Galeta_recollida"]
+[connection signal="vida" from="Galeta2" to="." method="_on_Galeta2_vida"]
 [connection signal="tocat" from="Area2D" to="." method="_on_Area2D_tocat"]
 
+[editable path="Enemic"]
 [editable path="Area2D"]

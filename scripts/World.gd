@@ -37,7 +37,7 @@ func _on_Projectil_disparat(area):
 		print("fill")
 		if area.is_in_group("Enemics"):
 			print("enemic") 
-			area.pendre_mal(-1)
+			e.pendre_mal(-1)
 
 
 # tocarà canvi de nivell
@@ -55,6 +55,11 @@ func _on_Galeta_recollida(algu:Node):
 		$goal.visible = 1
 		$goal.apareixer()
 	
+func _on_Galeta_vida(algu:Node):
+	print(algu)
+	var pers:=algu as Personatge
+	pers.suma_vides(1)
+	
 func _on_Area2D_tocat():
 	print("Aigua")
 	_pers.suma_vides(-1)
@@ -62,4 +67,5 @@ func _on_Area2D_tocat():
 
 func _on_Enemic_atac():
 	_pers.suma_vides(-1)
+
 

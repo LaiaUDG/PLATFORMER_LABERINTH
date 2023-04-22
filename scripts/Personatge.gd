@@ -106,17 +106,22 @@ func _physics_process(delta:float):
 func suma_vides(nv:int):	
 	var sprite = 'HUD/Sprite' + str(_nvides)
 	var node = get_node(sprite)
-	node.set_texture(CorApagat)
 	_nvides += nv
 	if _nvides == 0:
 		_immobil = true
+		node.set_texture(CorApagat)
 		$AnimationPlayer.play("Mort")
 		yield($AnimationPlayer,"animation_finished")
 		queue_free()
 		# pantalla inicial mode fail 
 	elif nv < 0: # ha perdut una vida
+		node.set_texture(CorApagat)
 		respawn()
-
+	else:
+		sprite = 'HUD/Sprite' + str(_nvides)
+		node = get_node(sprite)
+		node.set_texture(CorBrilla)
+		
 func omplir_energia():
 	$HUD/Energia.value=100
 
