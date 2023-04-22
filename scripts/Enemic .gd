@@ -28,7 +28,7 @@ func patrulla(delta):
 				offset += _vel * delta
 		else:
 			if unit_offset ==0:
-				$Area2D.scale.x=1
+				$Enemic.scale.x=1
 				direction = 1
 			else:
 				offset -= _vel * delta
@@ -36,16 +36,16 @@ func patrulla(delta):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if(SEGON):
-		$Area2D/Sprite.set_texture(SEGON_texture)
+		$Enemic/Sprite.set_texture(SEGON_texture)
 	else:
-		$Area2D/Sprite.set_texture(PRIMER_texture)
+		$Enemic/Sprite.set_texture(PRIMER_texture)
 	pupa=false
 
 func _process(delta:float):
 	if state == "quiet":
-		$Area2D/AnimationPlayer.play("Idle")
+		$Enemic/AnimationPlayer.play("Idle")
 	elif state == "patrulla":
-		$Area2D/AnimationPlayer.play("Walk")
+		$Enemic/AnimationPlayer.play("Walk")
 		patrulla(delta)
 		
 
@@ -53,9 +53,9 @@ func pendre_mal(quant):
 	print("Mal enemic")
 	vida += quant
 	if (vida <= 0):
-		$Area2D/AnimationPlayer.play("Mort")
+		$Enemic/AnimationPlayer.play("Mort")
 	else:
-		$Area2D/AnimationPlayer.play("Mal")
+		$Enemic/AnimationPlayer.play("Mal")
 	
 		
 func afegir_presa(el:Node):
@@ -66,8 +66,8 @@ func _on_Enemic_body_entered(body: Node):
 		emit_signal("atac")
 		vida += -1 
 		if (vida <= 0):
-			$Area2D/AnimationPlayer.play("Mort")
+			$Enemic/AnimationPlayer.play("Mort")
 		else:
-			$Area2D/AnimationPlayer.play("Mal")
+			$Enemic/AnimationPlayer.play("Mal")
 	
 

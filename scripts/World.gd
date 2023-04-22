@@ -25,7 +25,7 @@ func _on_personatge_dispara(aDreta:bool, posicio:Vector2):
 	p.ini(vd, posicio)
 	p.afegir_emissor($Personatge)
 	for enemic in get_tree().get_nodes_in_group("Enemics"):
-		p.afegir_tocable(enemic)
+		p.afegir_tocable(enemic.get_child(0))
 	p.connect("disparat", self, "_on_Projectil_disparat")
 	add_child(p,true)
  
@@ -35,7 +35,7 @@ func _on_Projectil_disparat(area):
 	if area.get_parent(): # si té pare, si no és null
 		var e = area.get_parent()
 		print("fill")
-		if area.is_in_group("Enemics"):
+		if e.is_in_group("Enemics"):
 			print("enemic") 
 			e.pendre_mal(-1)
 

@@ -499,12 +499,10 @@ tile_data = PoolIntArray( 1310755, 1, 0, 1441790, 0, 0, 1441791, 536870912, 0, 1
 position = Vector2( 1056, 478 )
 scale = Vector2( 1.3, 1.3 )
 
-[node name="Enemic" parent="." instance=ExtResource( 10 )]
+[node name="Enemic" parent="." groups=["Enemics"] instance=ExtResource( 10 )]
 position = Vector2( 190, 525 )
 scale = Vector2( 0.8, 0.8 )
 state = "quiet"
-
-[node name="Area2D" parent="Enemic" index="0" groups=["Enemics"]]
 
 [node name="puntInici" type="Position2D" parent="."]
 position = Vector2( 24, 520 )
@@ -514,7 +512,7 @@ position = Vector2( 302, 531 )
 scale = Vector2( 0.2, 0.2 )
 curve = SubResource( 13 )
 
-[node name="Enemic" parent="Path2D" instance=ExtResource( 10 )]
+[node name="Enemic" parent="Path2D" groups=["Enemics"] instance=ExtResource( 10 )]
 position = Vector2( 845, -490 )
 SEGON = true
 

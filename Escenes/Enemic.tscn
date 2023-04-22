@@ -11,7 +11,7 @@ height = 16.5372
 resource_name = "Atac"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Area2D/Sprite:frame_coords")
+tracks/0/path = NodePath("Enemic/Sprite:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -28,7 +28,7 @@ resource_name = "Idle"
 length = 0.5
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Area2D/Sprite:frame_coords")
+tracks/0/path = NodePath("Enemic/Sprite:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -44,7 +44,7 @@ tracks/0/keys = {
 resource_name = "Mal"
 length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("Area2D/Sprite:frame_coords")
+tracks/0/path = NodePath("Enemic/Sprite:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -86,7 +86,7 @@ tracks/0/keys = {
 } ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Area2D/Sprite:frame_coords")
+tracks/1/path = NodePath("Enemic/Sprite:frame_coords")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -113,36 +113,12 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=3]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/path = NodePath("Enemic/Sprite:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:pupa")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Area2D/Sprite:frame_coords")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -154,7 +130,7 @@ resource_name = "Walk"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Area2D/Sprite:frame_coords")
+tracks/0/path = NodePath("Enemic/Sprite:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -171,20 +147,20 @@ script = ExtResource( 1 )
 pupa = true
 state = "Mal"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Enemic" type="Area2D" parent="."]
 
-[node name="Sprite" type="Sprite" parent="Area2D"]
+[node name="Sprite" type="Sprite" parent="Enemic"]
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )
 hframes = 8
 vframes = 5
 frame = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemic"]
 position = Vector2( -1.25, 3 )
 shape = SubResource( 5 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemic"]
 root_node = NodePath("../..")
 anims/Atac = SubResource( 7 )
 anims/Idle = SubResource( 1 )
@@ -192,3 +168,5 @@ anims/Mal = SubResource( 6 )
 anims/Mort = SubResource( 2 )
 anims/RESET = SubResource( 3 )
 anims/Walk = SubResource( 4 )
+
+[connection signal="body_entered" from="Enemic" to="." method="_on_Enemic_body_entered"]
