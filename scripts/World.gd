@@ -13,6 +13,7 @@ func _ready():
 	_pers.set_pos_inicial($puntInici.position)  
 	add_child(_pers)  # afegim personatge a l'escena
 	_pers.connect("dispara", self, "_on_personatge_dispara")
+	
 	get_tree().call_group("Monedes", "afegir_recollidor", $Personatge) 
 	get_tree().call_group("Enemics", "afegir_presa", $Personatge) 
 	$goal.afegir_assolidor($Personatge)
@@ -43,7 +44,7 @@ func _on_Projectil_disparat(area):
 # tocarà canvi de nivell
 func _on_goal_objectiu_assolit(esser:Node):
 	remove_child(_pers) # per tal de mantenir-lo
-	$"/root/inici".canvia_nivell()
+	$"/root/Inici".seguent_niv()
 	# aquí ha de mostrar pantalla de GUANYAT
 
 func _on_Galeta_recollida(algu:Node):

@@ -23,7 +23,7 @@ var _caient := false # indica si el personatge està caient
 var _Dispara = false
 var _immobil = false
 var _enmoviment = false
-
+var niv = 1
 signal dispara(dreta, posicio)
 # inicialitzem posició inicial i etiqueta on mostra nombre de vides
 func _ready():
@@ -151,3 +151,8 @@ func _on_Estamina_timeout():
 func _on_Energia_value_changed(value):
 	 if ($HUD/Energia.value <= $HUD/Energia.min_value):
 			suma_vides(-1)
+			
+func seguent_niv():
+	niv+=1
+	if (niv<=3):
+		$HUD/Label.text=str(niv)

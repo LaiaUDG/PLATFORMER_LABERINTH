@@ -27,5 +27,7 @@ func _on_goal_body_entered(body: Node):
 	print(body.position)
 	print(position)
 	if body in _assolidors:
+		print("Assolidor")
 		if (mostrar):
+			print(mostrar)
 			emit_signal("objectiu_assolit", body)

@@ -367,7 +367,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="Curve2D" id=13]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 845, -490, 0, 0, 0, 0, 1620, -490 )
+"points": PoolVector2Array( 0, 0, 0, 0, 845, -490, 0, 0, 0, 0, 1000, -488 )
 }
 
 [sub_resource type="RectangleShape2D" id=6]
@@ -508,17 +508,18 @@ state = "quiet"
 position = Vector2( 24, 520 )
 
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2( 302, 531 )
-scale = Vector2( 0.2, 0.2 )
+position = Vector2( -367, 918 )
 curve = SubResource( 13 )
 
 [node name="Enemic" parent="Path2D" groups=["Enemics"] instance=ExtResource( 10 )]
 position = Vector2( 845, -490 )
+rotation = 0.0128985
+scale = Vector2( 0.8, 0.8 )
 loop = false
 SEGON = true
 state = "patrulla"
 
-[node name="Galeta" parent="." groups=["Monedes"] instance=ExtResource( 6 )]
+[node name="Galeta" parent="." instance=ExtResource( 6 )]
 position = Vector2( 302, 527 )
 scale = Vector2( 0.2, 0.2 )
 VIDES = true
@@ -550,6 +551,7 @@ position = Vector2( 355, 650 )
 position = Vector2( 367, 15 )
 shape = SubResource( 6 )
 
+[connection signal="objectiu_assolit" from="goal" to="." method="_on_goal_objectiu_assolit"]
 [connection signal="atac" from="Enemic" to="." method="_on_Enemic_atac"]
 [connection signal="tocat" from="Enemic" to="." method="_on_Enemic_tocat"]
 [connection signal="atac" from="Path2D/Enemic" to="." method="_on_Enemic_atac"]

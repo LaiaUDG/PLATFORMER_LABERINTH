@@ -10,11 +10,13 @@ export var vida = 2
 export var _vel:= 30
 export var SEGON:=false
 export var pupa = false
+export var Patrulla:=false
 export var state : String = "patrulla"
 export (String, "loop", "linear") var tipus_patrulla = "linear"
 
 var moviment:=false
 var direction:=1
+var anterior = ""
 
 func patrulla(delta):
 	if tipus_patrulla == "loop":
@@ -23,17 +25,21 @@ func patrulla(delta):
 		if	direction == 1:
 			if (unit_offset == 1):
 				$Enemic/Pausa.start()
-				if(state == "patrulla"):
-					$Enemic.scale.x=-1
-					direction = 0
+				state="quiet"
+				$Enemic/AnimationPlayer.play("Idle")
+				yield($Enemic/Pausa, "timeout")
+				$Enemic.scale.x=-1
+				direction = 0
 			else:
 				offset += _vel * delta
 		else:
 			if unit_offset ==0:
 				$Enemic/Pausa.start()
-				if(state == "patrulla"):
-					$Enemic.scale.x=1
-					direction = 1
+				state="quiet"
+				$Enemic/AnimationPlayer.play("Idle")
+				yield($Enemic/Pausa, "timeout")
+				$Enemic.scale.x=1
+				direction = 1
 			else:
 				offset -= _vel * delta
 
@@ -46,6 +52,8 @@ func _ready():
 	pupa=false
 
 func _process(delta:float):
+	if state=="anterior":
+		state=anterior
 	if state == "quiet":
 		$Enemic/AnimationPlayer.play("Idle")
 	elif state == "patrulla":
@@ -56,6 +64,7 @@ func _process(delta:float):
 func pendre_mal(quant):
 	print("Mal enemic")
 	vida += quant
+	anterior=state
 	if (vida <= 0):
 		$Enemic/AnimationPlayer.play("Mort")
 	else:
