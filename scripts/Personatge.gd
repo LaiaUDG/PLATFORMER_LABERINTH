@@ -17,27 +17,33 @@ onready var Pos_Ma = $Ma
 var _vel := Vector2()     # velocitat actual
 var _mirantADreta = true  # la textura per defecte mira a dreta
 var _posInicial: Vector2  # posició on comença el nivell
-export var _nvides:= 3 
+var _nvides:= 3 
 export var _maxvides:=3 #en el nivell 1=3, nivvell2 =4; nivell3=6
 var _caient := false # indica si el personatge està caient
 var _Dispara = false
 var _immobil = false
 var _enmoviment = false
 var niv = 1
+
 signal dispara(dreta, posicio)
 # inicialitzem posició inicial i etiqueta on mostra nombre de vides
 func _ready():
+	$HUD/Temps.text=String(Inici._temps/60)+":"+String(Inici._temps%60)
+	$HUD/Temps.visible=0
+	
 	var i=_maxvides+1
 	$HUD/Energia.value=100
 	while i <= MAX_VIDES:
 		var sprite = 'HUD/Sprite' + str(i)
 		var node = get_node(sprite)
 		node.visible = 0
+		node.set_texture(CorApagat)
 		i+=1
-	$Estamina.start()
+	$HUD/Medalla1.visible=0
+	$HUD/Medalla2.visible=0
+	$HUD/Medalla3.visible=0
 # injectem la posició inicial
 func set_pos_inicial(pos:Vector2):
-	print(pos)
 	position = pos
 	_posInicial = pos # per quan es faci respawn 	
 
@@ -97,16 +103,19 @@ func _physics_process(delta:float):
 		_Dispara = true
 		$AnimationPlayer.play("Atac")
 		$HUD/Energia.value = $HUD/Energia.value - 5
-		$Disparar.start()
+		$Disparar.start(1)
 	
 	if (!_immobil and !_Dispara):
 		_vel = move_and_slide(_vel, NORMAL)
 		
 # nv >= -1 ; modifica i mostra nombre final de vides; fa respawn si ha perdut vida
-func suma_vides(nv:int):	
+func suma_vides(nv:int):
 	var sprite = 'HUD/Sprite' + str(_nvides)
 	var node = get_node(sprite)
+	var i = _nvides+1
 	_nvides += nv
+	if _nvides>_maxvides:
+		_nvides=_maxvides
 	if _nvides == 0:
 		_immobil = true
 		node.set_texture(CorApagat)
@@ -115,10 +124,12 @@ func suma_vides(nv:int):
 	elif nv < 0: # ha perdut una vida
 		node.set_texture(CorApagat)
 		respawn()
-	else:
-		sprite = 'HUD/Sprite' + str(_nvides)
-		node = get_node(sprite)
-		node.set_texture(CorBrilla)
+	else:	
+		while i<=_nvides:
+			sprite = 'HUD/Sprite' + str(i)
+			node = get_node(sprite)
+			node.set_texture(CorBrilla)
+			i+=1
 		
 func omplir_energia():
 	$HUD/Energia.value=100
@@ -144,13 +155,43 @@ func _on_Disparar_timeout():
 func _on_Estamina_timeout():
 	if(_enmoviment):
 		$HUD/Energia.value = $HUD/Energia.value - 1		
-	$Estamina.start()
+	if(niv==3):
+		print("Inici._temps")
+		if Inici._temps>0:
+			print("_tempsRestant")
+			Inici.Actualitza_temps()
+		else:
+			_immobil = true
+			$AnimationPlayer.play("Mort")
+
+
 
 func _on_Energia_value_changed(value):
 	 if ($HUD/Energia.value <= $HUD/Energia.min_value):
 			suma_vides(-1)
 			
 func seguent_niv():
+	var sprite = 'HUD/Medalla' + str(niv)
+	var medalla = get_node(sprite)
+	medalla.visible=1
 	niv+=1
-	if (niv<=3):
+	print(Inici.NIVELLS)
+	var MaxN=Inici.NIVELLS
+	if (niv<=MaxN):
 		$HUD/Label.text=str(niv)
+	if(niv==2):
+		_maxvides+=1
+		$HUD/Sprite4.visible=1
+		suma_vides(1)
+	if (niv==3):
+		_maxvides+=2
+		$HUD/Temps.visible=1
+		$HUD/Sprite5.visible=1
+		$HUD/Sprite6.visible=1
+		suma_vides(2)
+		
+func Final():
+	$"/root/Inici".pantalla_final()
+
+func restart():
+	_ready()

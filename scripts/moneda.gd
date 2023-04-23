@@ -23,10 +23,8 @@ func _ready():
 func _on_moneda_body_entered(body: Node):
 	if body in _recollidors: # si té capacitat de recollir moneda
 		if(VIDES):
-			print("POMA")
 			emit_signal("vida",body)
 		else:
-			print("Galeta")
 			emit_signal("recollida", body)
 			remove_from_group("Monedes")
 		queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://dogica.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Sprites/Enemics/medalla2.png" type="Texture" id=2]
@@ -8,6 +8,12 @@
 [ext_resource path="res://Sprites/FInal.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
@@ -43,3 +49,24 @@ custom_fonts/font = SubResource( 1 )
 text = "Has mort"
 align = 1
 valign = 1
+
+[node name="Surt" type="Button" parent="."]
+anchor_right = 0.865
+margin_left = 336.0
+margin_top = 512.0
+margin_right = 437.0
+margin_bottom = 550.0
+custom_fonts/font = SubResource( 2 )
+text = "Surt"
+
+[node name="Jugar" type="Button" parent="."]
+anchor_right = 0.865
+margin_left = 576.0
+margin_top = 512.0
+margin_right = 677.0
+margin_bottom = 550.0
+custom_fonts/font = SubResource( 2 )
+text = "Juga"
+
+[connection signal="pressed" from="Surt" to="." method="_on_Surt_pressed"]
+[connection signal="pressed" from="Jugar" to="." method="_on_Jugar_pressed"]

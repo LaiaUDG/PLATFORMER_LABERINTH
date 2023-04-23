@@ -32,12 +32,9 @@ func _on_personatge_dispara(aDreta:bool, posicio:Vector2):
  
 
 func _on_Projectil_disparat(area):
-	print("disparat")
 	if area.get_parent(): # si té pare, si no és null
 		var e = area.get_parent()
-		print("fill")
 		if e.is_in_group("Enemics"):
-			print("enemic") 
 			e.pendre_mal(-1)
 
 
@@ -45,6 +42,7 @@ func _on_Projectil_disparat(area):
 func _on_goal_objectiu_assolit(esser:Node):
 	remove_child(_pers) # per tal de mantenir-lo
 	$"/root/Inici".seguent_niv()
+
 	# aquí ha de mostrar pantalla de GUANYAT
 
 func _on_Galeta_recollida(algu:Node):
@@ -57,16 +55,15 @@ func _on_Galeta_recollida(algu:Node):
 		$goal.apareixer()
 	
 func _on_Galeta_vida(algu:Node):
-	print(algu)
 	var pers:=algu as Personatge
 	pers.suma_vides(1)
 	
 func _on_Area2D_tocat():
-	print("Aigua")
 	_pers.suma_vides(-1)
 
 
 func _on_Enemic_atac():
 	_pers.suma_vides(-1)
+
 
 

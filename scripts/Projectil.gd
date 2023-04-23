@@ -16,7 +16,6 @@ func ini(dir:Vector2, posIni: Vector2):
 	dir = dir.normalized()
 	_vdir.x = dir.x * _vel
 	_vdir.y = -_vel
-	print("Ini Projectil")
 	
 # moviment de la bala 
 func _process(delta:float):
@@ -25,7 +24,6 @@ func _process(delta:float):
 	position += _vdir * delta
 
 func afegir_tocable(esser:Node):
-	print("nou toc")
 	_tocables.append(esser)
 	
 func afegir_emissor(esser:Node):
@@ -37,9 +35,7 @@ func _on_Projectil_body_entered(body:PhysicsBody2D):
 	
 # si el cos tocat és a _tocables, l'elimina; en qualsevol cas, elimina la bala
 func _on_Projectil_area_entered(area:Area2D):
-	print("Area2d pedra")
 	if area in _tocables:
-		print("Tocable")
 		emit_signal("disparat",area)
 	queue_free() # eliminem la bala
 

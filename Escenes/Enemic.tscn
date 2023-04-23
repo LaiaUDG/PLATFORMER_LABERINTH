@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/Enemic .gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Enemics/Enemic blau.png" type="Texture" id=2]
@@ -21,6 +21,24 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 3 ), Vector2( 1, 3 ), Vector2( 2, 3 ), Vector2( 3, 3 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Climb"
+length = 0.6
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Enemic/Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 5 ), Vector2( 1, 5 ), Vector2( 2, 5 ), Vector2( 3, 5 ) ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -109,6 +127,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [ "Mal", "quiet" ]
 }
+tracks/3/type = "method"
+tracks/3/path = NodePath("Enemic/CollisionShape2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -144,7 +176,6 @@ tracks/0/keys = {
 
 [node name="Enemic" type="PathFollow2D"]
 script = ExtResource( 1 )
-pupa = true
 state = "Mal"
 
 [node name="Enemic" type="Area2D" parent="."]
@@ -157,7 +188,7 @@ one_shot = true
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )
 hframes = 8
-vframes = 5
+vframes = 6
 frame = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemic"]
@@ -167,6 +198,7 @@ shape = SubResource( 5 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Enemic"]
 root_node = NodePath("../..")
 anims/Atac = SubResource( 7 )
+anims/Climb = SubResource( 8 )
 anims/Idle = SubResource( 1 )
 anims/Mal = SubResource( 6 )
 anims/Mort = SubResource( 2 )
