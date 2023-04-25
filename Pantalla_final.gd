@@ -1,5 +1,7 @@
 extends Node2D
 
+#Pantalla final, es mostra quan el jugador passa de nivell o mort, serveix per a treire el joc o fer restart
+
 const Blau:=preload("res://Sprites/Enemics/medalla.png")
 const Verd:= preload("res://Sprites/Enemics/medalla3.png")
 const Vermell:= preload("res://Sprites/Enemics/medalla2.png")
@@ -33,8 +35,8 @@ func _ready():
 			$Sprite2.visible=1
 			$Sprite3.visible=0
 
-func _on_Surt_pressed():
+func _on_Surt_pressed(): #per a sortir del joc
 	get_tree().quit()
 
-func _on_Jugar_pressed():
+func _on_Jugar_pressed():#crida a metode de la singleton
 	Inici.Restart()

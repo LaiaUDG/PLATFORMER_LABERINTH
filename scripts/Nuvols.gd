@@ -1,5 +1,7 @@
 extends ParallaxLayer
 
+#Moviment dels nuvols dins de la ParallaxLayer
+
 export(float) var Nuvol_velocitat = -5
 
 func _process(delta) -> void: #Moviment del fons 

@@ -235,13 +235,9 @@ shape = SubResource( 6 )
 
 [connection signal="objectiu_assolit" from="goal" to="." method="_on_goal_objectiu_assolit"]
 [connection signal="atac" from="Enemic" to="." method="_on_Enemic_atac"]
-[connection signal="tocat" from="Enemic" to="." method="_on_Enemic_tocat"]
 [connection signal="atac" from="Path2D/Enemic" to="." method="_on_Enemic_atac"]
-[connection signal="tocat" from="Path2D/Enemic" to="." method="_on_Enemic_tocat"]
 [connection signal="atac" from="Path2D3/Enemic" to="." method="_on_Enemic_atac"]
-[connection signal="tocat" from="Path2D3/Enemic" to="." method="_on_Enemic_tocat"]
 [connection signal="atac" from="Path2D2/Enemic" to="." method="_on_Enemic_atac"]
-[connection signal="tocat" from="Path2D2/Enemic" to="." method="_on_Enemic_tocat"]
 [connection signal="recollida" from="Galeta" to="." method="_on_Galeta_recollida"]
 [connection signal="vida" from="Galeta" to="." method="_on_Galeta_vida"]
 [connection signal="recollida" from="Galeta8" to="." method="_on_Galeta_recollida"]

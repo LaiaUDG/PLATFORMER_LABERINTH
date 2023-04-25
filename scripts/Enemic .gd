@@ -1,6 +1,9 @@
 extends PathFollow2D
 
-signal atac
+
+
+signal atac#quan toca el jugador
+
 const PRIMER_texture:=preload("res://Sprites/Enemics/Enemic blau.png")
 const SEGON_texture:=preload("res://Sprites/Enemics/Enemic rosa.png")
 export var _Preses:=[]
@@ -8,7 +11,7 @@ var pupa = false
 export var vida = 2
 export var _vel:= 30
 export var SEGON:=false
-export var state : String = "patrulla"
+export var state : String = "patrulla" #Estat de l'enemic patrulla,climb,quiet,anterior,
 var climb = false
 export (String, "loop", "linear") var tipus_patrulla = "linear"
 
@@ -16,6 +19,7 @@ var moviment:=false
 var direction:=1
 var anterior = ""
 
+ #animacio i moviment de l'enemic depenent del valor de la variable estat
 func patrulla(delta):
 	if tipus_patrulla == "loop":
 		offset += _vel * delta
@@ -41,7 +45,7 @@ func patrulla(delta):
 			else:
 				offset -= _vel * delta
 
-func Escala(delta):
+func Escala(delta): #Moviment del jugador en cas que el seu estat sigui escalar
 	if tipus_patrulla == "loop":
 		offset += _vel * delta
 	else:
@@ -61,7 +65,6 @@ func Escala(delta):
 				offset -= _vel * delta
 	
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	if(SEGON):
 		$Enemic/Sprite.set_texture(SEGON_texture)
@@ -83,6 +86,7 @@ func _process(delta:float):
 			$Enemic/AnimationPlayer.play("Climb")
 			Escala(delta)
 
+#treure vida a l'enemic
 func pendre_mal(quant):
 	vida += quant
 	anterior=state

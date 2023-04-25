@@ -44,7 +44,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Platformer_Laberinth"
+config/name="Plataforma"
 run/main_scene="res://Escenes/World.tscn"
 
 [autoload]

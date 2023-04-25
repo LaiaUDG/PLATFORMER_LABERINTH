@@ -24,15 +24,15 @@ func _init():
 func seguent_niv():
 	_jugador.seguent_niv()
 	_nivActual += 1
-	if _nivActual > NIVELLS: # esquema circular 
+	if _nivActual > NIVELLS: #
 		get_tree().change_scene_to(FINAL)
 	else:
 		get_tree().change_scene_to(_nivells[_nivActual-1])
-		#if _nivActual==3
 		
 func pantalla_final():
 	get_tree().change_scene_to(FINAL)
 
+#cada segon es crida, actualitza el temps que queda per a completar el nivell final
 func Actualitza_temps():
 	if _temps > 0:	
 		print(_temps)
@@ -44,6 +44,7 @@ func Actualitza_temps():
 		_jugador.Mort()
 		_temps=10
 		
+#Reinicia el joc	
 func Restart():
 	_init()
 	_nivActual = 1

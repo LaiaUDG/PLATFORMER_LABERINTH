@@ -20,9 +20,9 @@ var _posInicial: Vector2  # posició on comença el nivell
 var _nvides:= 3 
 export var _maxvides:=3 #en el nivell 1=3, nivvell2 =4; nivell3=6
 var _caient := false # indica si el personatge està caient
-var _Dispara = false
-var _immobil = false
-var _enmoviment = false
+var _Dispara = false # indica si el personatge està disparant
+var _immobil = false # indica si el personatge ha d'estar immobil
+var _enmoviment = false # indica si el personatge està movent-se
 var niv = 1
 
 signal dispara(dreta, posicio)
@@ -60,11 +60,11 @@ func _physics_process(delta:float):
 	_vel.x = clamp(_vel.x, -MAX_VELOC, MAX_VELOC)
 	
 	if Input.is_action_pressed("ui_right"):
-		if (!_immobil and !_Dispara):
-			_enmoviment=true
+		if (!_immobil and !_Dispara): #Si esta disparant o ha d'estar immobil no podra moures
+			_enmoviment=true #s'esta movent
 			_vel.x += ACCEL_X
 			_mirantADreta = true  # encara que segueixi movent-se a esquerra
-			if (!_caient):
+			if (!_caient): #Si no s'esta caient canviem animacio
 				$AnimationPlayer.play("Run")
 	elif Input.is_action_pressed("ui_left"):
 		if (!_immobil and !_Dispara):
@@ -83,11 +83,11 @@ func _physics_process(delta:float):
 	if is_on_floor():
 		_caient=false
 		if Input.is_action_just_pressed("salta"):
-			if (!_immobil and !_Dispara):
+			if (!_immobil and !_Dispara): #Si no ha d'estar quiet i no sispara podra saltar
 				$AnimationPlayer.play("Jump")
 				_vel.y = VEL_SALT # no sumem, assignem
-				_caient=true
-				$HUD/Energia.value = $HUD/Energia.value-10
+				_caient=true #caient true, per a sapiguer que no esta tocant el terra
+				$HUD/Energia.value = $HUD/Energia.value-10 #restem energia al jugador per cada salt que fa
 	else:
 		_enmoviment=false
 		if _vel.y < 0: # està pujant 
@@ -98,14 +98,14 @@ func _physics_process(delta:float):
 				$AnimationPlayer.play("fall")
 		else:
 			_caient=false
-	
+	#No podra disparar si ja esta disparant, tampoc pot disparar si esta en el aire
 	if !_Dispara and !_caient and Input.is_action_just_pressed("Disparar"):
 		_Dispara = true
 		$AnimationPlayer.play("Atac")
-		$HUD/Energia.value = $HUD/Energia.value - 5
+		$HUD/Energia.value = $HUD/Energia.value - 5 #restem energi aper cada cop que dispara
 		$Disparar.start(1)
 	
-	if (!_immobil and !_Dispara):
+	if (!_immobil and !_Dispara): #No es moura de la seva posicio si esta immobil o si esta atacant
 		_vel = move_and_slide(_vel, NORMAL)
 		
 # nv >= -1 ; modifica i mostra nombre final de vides; fa respawn si ha perdut vida
@@ -117,7 +117,7 @@ func suma_vides(nv:int):
 	if _nvides>_maxvides:
 		_nvides=_maxvides
 	if _nvides == 0:
-		_immobil = true
+		_immobil = true #Quan es atacat farem que no es pugui moure 
 		node.set_texture(CorApagat)
 		$AnimationPlayer.play("Mort")
 		# pantalla inicial mode fail 
@@ -151,7 +151,7 @@ func respawn():
 func _on_Disparar_timeout():
 	_Dispara=false
 
-
+#REstar estamina cada 1 segon
 func _on_Estamina_timeout():
 	if(_enmoviment):
 		$HUD/Energia.value = $HUD/Energia.value - 1		
