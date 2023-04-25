@@ -34,7 +34,6 @@ func pantalla_final():
 	get_tree().change_scene_to(FINAL)
 
 func Actualitza_temps():
-	print("Aactualitza temps:")
 	if _temps > 0:	
 		print(_temps)
 		_temps=_temps-1

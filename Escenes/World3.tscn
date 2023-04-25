@@ -671,7 +671,7 @@ curve = SubResource( 20 )
 
 [node name="Enemic" parent="Path2D3" groups=["Enemics"] instance=ExtResource( 10 )]
 position = Vector2( 909.676, -490 )
-rotation = -1.52674e-05
+rotation = -1.52676e-05
 scale = Vector2( 0.8, 0.8 )
 offset = 64.6621
 loop = false

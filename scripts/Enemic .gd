@@ -1,7 +1,6 @@
 extends PathFollow2D
 
 signal atac
-signal tocat
 const PRIMER_texture:=preload("res://Sprites/Enemics/Enemic blau.png")
 const SEGON_texture:=preload("res://Sprites/Enemics/Enemic rosa.png")
 export var _Preses:=[]

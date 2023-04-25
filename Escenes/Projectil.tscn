@@ -17,4 +17,3 @@ shape = SubResource( 1 )
 
 [connection signal="area_entered" from="." to="." method="_on_Projectil_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Projectil_body_entered"]
-[connection signal="disparat" from="." to="." method="_on_Projectil_disparat"]

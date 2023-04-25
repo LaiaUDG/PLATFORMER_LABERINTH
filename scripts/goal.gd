@@ -2,7 +2,7 @@ class_name Goal extends Area2D
 # un punt objectiu a assolir
 
 signal objectiu_assolit(esser)
-var mostrar = false
+export var mostrar = false
 
 var _assolidors:= []  # aquí injectarem els qui podran assolir objectiu 
 
@@ -13,8 +13,7 @@ func afegir_assolidor(asso:Node):
 	
 func apareixer():
 	$AnimationPlayer.play("apareixer")
-	yield(get_node("AnimationPlayer"), "animation_finished")
-	mostrar = true
+
 
 func _process(delta:float):
 	if (mostrar):

@@ -175,7 +175,6 @@ func seguent_niv():
 	var medalla = get_node(sprite)
 	medalla.visible=1
 	niv+=1
-	print(Inici.NIVELLS)
 	var MaxN=Inici.NIVELLS
 	if (niv<=MaxN):
 		$HUD/Label.text=str(niv)
@@ -195,3 +194,4 @@ func Final():
 
 func restart():
 	_ready()
+

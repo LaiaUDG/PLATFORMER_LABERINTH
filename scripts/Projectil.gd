@@ -1,14 +1,13 @@
 class_name Projectil extends Area2D
-# bala amb moviment rectilini uniforme
-# quan toca un enemic el mata i desapareix; si toca un StaticBody o 
-# surt d'escena, també desapareix 
+# bala amb moviment parabolic
+# Al tocar qualsevol objecte amb collision shape desapareix. 
 
 signal disparat(area) # area tocada
 const GRAVETAT := 980
 export var _vel:= 400 # píxels per segon 
 var _tocables:= []    # éssers afectats per la bala (inj. de depend.)
 var _emissors:= []    # éssers que disparen les bales 
-var _vdir:= Vector2() # vector velocitat
+var _vdir:= Vector2() # vector velocitat i direcció 
 
 # inicialitzem el vector velocitat de la bala i la pos inicial
 func ini(dir:Vector2, posIni: Vector2):
@@ -31,13 +30,13 @@ func afegir_emissor(esser:Node):
 
 func _on_Projectil_body_entered(body:PhysicsBody2D):
 	if not body in _emissors:
-		queue_free() # eliminem la bala
+		queue_free() # Borrar projectil 
 	
-# si el cos tocat és a _tocables, l'elimina; en qualsevol cas, elimina la bala
+# si el cos tocat és a _tocables, l'elimina; en qualsevol cas, elimina 
 func _on_Projectil_area_entered(area:Area2D):
 	if area in _tocables:
 		emit_signal("disparat",area)
-	queue_free() # eliminem la bala
+	queue_free() # Borrar projectil
 
 # per si s'escapa de la pantalla sense tocar res
 func _on_VisibilityNotifier2D_screen_exited():
